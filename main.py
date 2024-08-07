@@ -50,7 +50,7 @@ async def check_for_new_posts():
                     await channel.send(post_content)
         except Exception as e:
             print(f"Error fetching or sending posts: {e}")
-        await asyncio.sleep(10)  # Check every 5 minutes
+        await asyncio.sleep(10)  # Check every 10 seconds
 
 @client.event
 async def on_ready():
