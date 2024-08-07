@@ -20,17 +20,17 @@ reddit = praw.Reddit(client_id=REDDIT_CLIENT_ID,
                      client_secret=REDDIT_CLIENT_SECRET,
                      user_agent=REDDIT_USER_AGENT)
 
-CHANNEL_ID = 1268267896547709031  # Replace with your correct channel ID
-SUBREDDIT = 'HonkaiStarRail_Leaks'
+CHANNEL_ID = 1268267896547709031  # Channel ID
+SUBREDDIT = 'HonkaiStarRail_Leaks' # Subreddit Name
 
 async def fetch_new_reddit_posts(subreddit, last_post_id=None):
     subreddit = reddit.subreddit(subreddit)
     posts = []
-    for submission in subreddit.new(limit=1):  # Fetch up to 10 new posts
-        if last_post_id and submission.id == last_post_id:
+    for submission in subreddit.new(limit=1):  # Fetch 1 post 
+        if last_post_id and submission.id == last_post_id: # If post is already sent, ignore
             break
         message = f"**{submission.title}**\nhttps://reddit.com{submission.permalink}"
-        posts.append((submission.id, message))
+        posts.append((submission.id, message)) # Else, add link and post to posts array
     return posts
 
 async def check_for_new_posts():
