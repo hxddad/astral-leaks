@@ -1,0 +1,5 @@
+discord
+dotenv
+praw
+asyncio
+discord-interactions
