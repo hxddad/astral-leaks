@@ -3,6 +3,7 @@ import discord
 import praw
 from dotenv import load_dotenv
 import asyncio
+from discord_interactions import verify_key_decorator
 
 # Load environment variables from .env file
 load_dotenv()
@@ -12,6 +13,7 @@ REDDIT_CLIENT_ID = os.getenv('REDDIT_CLIENT_ID')
 REDDIT_CLIENT_SECRET = os.getenv('REDDIT_CLIENT_SECRET')
 REDDIT_USER_AGENT = os.getenv('REDDIT_USER_AGENT')
 USER_ID = os.getenv('USER_ID')
+DISCORD_PUBLIC_KEY = os.getenv('DISCORD_PUBLIC_KEY')
 
 
 intents = discord.Intents.default()
@@ -24,6 +26,7 @@ reddit = praw.Reddit(client_id=REDDIT_CLIENT_ID,
 
 SUBREDDIT = 'HonkaiStarRail_Leaks'
 
+@verify_key_decorator(DISCORD_PUBLIC_KEY)
 async def fetch_new_reddit_posts(subreddit, last_post_id=None):
     subreddit = reddit.subreddit(subreddit)
     posts = []
